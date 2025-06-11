@@ -1,0 +1,47 @@
+/* List the details of the sales that have more than the average cost amount.  
+Select SalesAmount, Quantity, ProductCode, CostAmount
+From FactSales
+Where CostAmount > (Select AVG(costAmount) from FactSales)*/
+
+/* List the details of the sales that have more or equal than the average SalesAmount of the top 25 sales in SalesAmount. */
+/* Find a way to make this as a join table
+Select  TOP (25) SalesAmount, Quantity, ProductCode, CostAmount
+From FactSales
+order by SalesAmount desc
+*/
+
+/* Task 7
+Select sum(SalesAmount) as 'SumSales', avg(SalesAmount) as 'avgSales', MIN(Quantity) as 'minQ', max(Quantity) as 'maxQ', FactSales.ProductCode, DimProduct.ProductName
+From FactSales inner join DimProduct on FactSales.ProductCode = DimProduct.ProductCode
+Group by FactSales.ProductCode, DimProduct.ProductName
+order by ProductCode */
+
+/* How many sales exist for december 2020? 
+select count(SalesAmount)
+from FactSales
+where year(FullDateTime) = 2020 and MONTH(FullDateTime) = 12*/
+
+
+/* Task 8 Question 3
+DECLARE @string VARCHAR(10);
+SET @string = 1;
+SELECT @string + ' is a string.'
+
+DECLARE @notastring INT; Int is the issue
+SET @notastring = '1';
+SELECT @notastring + ' is not a string.'
+*/
+
+/* Task 9
+List the date of birth of all the employees in dmy and mdy formats. 
+SET DATEFORMAT dmy;
+SELECT CONVERT(DATE, getdate()) AS [MDY-Interpretation-of-input-format]
+from DimEmployee */
+
+/* Task 10 
+Concatenate the product name and product type in 1 column and name it CompleteProduct.
+
+select ProductName, ProductType, CONCAT(ProductName, ' ', ProductType) as [CompleteProduct]
+from DimProduct
+order by [CompleteProduct]
+*/

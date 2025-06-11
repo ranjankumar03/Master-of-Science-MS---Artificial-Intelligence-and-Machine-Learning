@@ -1,0 +1,57 @@
+/* List all the names and ages of non-active employees. 
+
+Select EmployeeFirstName, EmployeeLastName, EmployeeDOB, EmployeeActive, (DATEDIFF(DAY, EmployeeDOB, GETDATE()) / 365.25) as age1,  Datediff(Year, EmployeeDOB, GETDATE()) as age2
+From DimEmployee
+where EmployeeActive = 'No'
+
+/*List all the sales without a promotion from the year 2020 that their quantities are less than 20 if they happened on a Monday.*/
+
+select FullDateTime, Quantity, SalesAmount
+from FactSales 
+where Quantity < 20 and PromotionID IS NULL 
+and DATENAME(weekday, FullDateTime) = 'Monday'
+and year(FactSales.FullDateTime) =2020
+
+/* List all sale, transaction type, product, and waste records that have sales and waste recorded on the same days. (hint: try different joints)
+
+Select SalesAmount, TransactionType, ProductName, FactWaste.Amount, FactWaste.ActionTaken, FactWaste.Quantity
+From FactSales inner join DimProduct on FactSales.ProductCode = DimProduct.ProductCode
+inner join DimTransactionType on DimTransactionType.TransactionNo = FactSales.TransactionNo
+inner join FactWaste on DimProduct.ProductCode = FactWaste.ProductCode 
+where Convert(date, FactSales.FullDateTime) = FactWaste.FullDate
+ */
+
+/*
+List all sale, transaction type, product, and waste records that have at least sales recorded on the common sale-waste days. (hint: try different joints)
+
+
+Select SalesAmount, TransactionType, ProductName, FactWaste.Amount, FactWaste.ActionTaken, FactWaste.Quantity
+From FactSales inner join DimProduct on FactSales.ProductCode = DimProduct.ProductCode
+inner join DimTransactionType on DimTransactionType.TransactionNo = FactSales.TransactionNo
+left join FactWaste on DimProduct.ProductCode = FactWaste.ProductCode 
+and Convert(date, FactSales.FullDateTime) = FactWaste.FullDate
+*/
+/*
+List all sale, transaction type, product, and waste records that have at least wastes recorded on the common sale-waste days. (hint: try different joints)
+
+
+Select SalesAmount, TransactionType, ProductName, FactWaste.Amount, FactWaste.ActionTaken, FactWaste.Quantity
+From FactSales inner join DimProduct on FactSales.ProductCode = DimProduct.ProductCode
+inner join DimTransactionType on DimTransactionType.TransactionNo = FactSales.TransactionNo
+right join FactWaste on DimProduct.ProductCode = FactWaste.ProductCode 
+and Convert(date, FactSales.FullDateTime) = FactWaste.FullDate
+*/
+
+
+/* Create a case statement that returns a list of all the bakery’s products and their range, as well as the word “sweet” if the product is sweet and “savoury” if the product is savoury. 
+SELECT 
+        DimProduct.ProductName, DimProduct.ProductType,
+    CASE 
+        WHEN productType in ('Croissant', 'Danish', 'Filled') THEN 'Sweet'
+        WHEN productType in ('Bread', 'Bun') THEN 'Savoury'
+        else 'n/a'
+    END
+FROM DimProduct
+
+
+*/
