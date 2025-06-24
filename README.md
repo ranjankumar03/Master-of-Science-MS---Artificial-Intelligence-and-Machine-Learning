@@ -1,4 +1,4 @@
-# Master-of-Science-MSc---Artificial-Intelligence-and-Machine-Learning
+# Master-of-Science (MSc)---Artificial-Intelligence-and-Machine-Learning
 Master of Science - MSc, Artificial Intelligence &amp; Machine Learning | University of Portsmouth, England (UK)
 
 # Link
